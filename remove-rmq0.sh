@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+set -o xtrace
 set -o errexit
 set -o nounset
 set -o pipefail
 
 docker compose exec rmq0 rabbitmqctl stop_app
+docker compose exec rmq0 rabbitmqctl reset
 
 # Completely comment out cluster formation for rmq0
 sed -i.bak -e '/^cluster_formation/s/^/# /' rmq0.conf

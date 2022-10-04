@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  rabbitnet:
+    name: rabbitnet
+    driver: bridge
+
+services:
+  rmq0:
+    image: rabbitmq:3-management
+    hostname: rmq0
+    networks:
+      - rabbitnet
+    ports:
+      # HOST:CONTAINER
+      - 15672:15672
+    volumes:
+      - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./mnesia/rmq0:/var/lib/rabbitmq/mnesia
+  rmq1:
+    image: rabbitmq:3-management
+    hostname: rmq1
+    networks:
+      - rabbitnet
+    ports:
+      # HOST:CONTAINER
+      - 15673:15672
+    volumes:
+      - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./mnesia/rmq1:/var/lib/rabbitmq/mnesia
+  rmq2:
+    image: rabbitmq:3-management
+    hostname: rmq2
+    networks:
+      - rabbitnet
+    ports:
+      # HOST:CONTAINER
+      - 15674:15672
+    volumes:
+      - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./mnesia/rmq2:/var/lib/rabbitmq/mnesia

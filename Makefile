@@ -1,4 +1,7 @@
-.PHONY: clean setup user-perms rmq-perms
+.PHONY: clean down setup user-perms rmq-perms up
+
+up: rmq-perms
+	docker compose up
 
 down:
 	docker compose down

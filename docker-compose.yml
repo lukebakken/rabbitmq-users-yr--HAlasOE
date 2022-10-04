@@ -16,7 +16,7 @@ services:
       - 15672:15672
     volumes:
       - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
-      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./rmq0.conf:/etc/rabbitmq/conf.d/20-cluster.conf
       - ./mnesia/rmq0:/var/lib/rabbitmq/mnesia
   rmq1:
     image: rabbitmq:3-management
@@ -28,7 +28,7 @@ services:
       - 15673:15672
     volumes:
       - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
-      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./rmq1.conf:/etc/rabbitmq/conf.d/20-cluster.conf
       - ./mnesia/rmq1:/var/lib/rabbitmq/mnesia
   rmq2:
     image: rabbitmq:3-management
@@ -40,5 +40,5 @@ services:
       - 15674:15672
     volumes:
       - ./erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
-      - ./rabbitmq.conf:/etc/rabbitmq/conf.d/20-cluster.conf
+      - ./rmq2.conf:/etc/rabbitmq/conf.d/20-cluster.conf
       - ./mnesia/rmq2:/var/lib/rabbitmq/mnesia

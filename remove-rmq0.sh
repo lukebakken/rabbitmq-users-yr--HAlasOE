@@ -30,10 +30,14 @@ do
     restart_rmq "$SVC"
 done
 
-echo ABOUT TO RESET AND START RMQ0, ANY KEY TO CONTINUE
+echo ABOUT TO RESET RMQ0, ANY KEY TO CONTINUE
 read
 
 # Completely comment out cluster formation for rmq0
 sed -i.bak -e '/^cluster_formation/s/^/# /' rmq0.conf
 docker compose exec rmq0 rabbitmqctl reset
+
+echo ABOUT TO RESTART RMQ0, ANY KEY TO CONTINUE
+read
+
 restart_rmq rmq0
